@@ -303,3 +303,323 @@ console.log(false == undefined);
     js에서는 console.log('2' - '2') 를 계산하면 0이 출력된다
 
     그 이유는 -를 보는순간 수학적 연산을 하려고 하는구나 하고 Number로 형변환을 하기 때문.
+
+# Object
+
+    object는 다양한 키 모음 및 더 복잡한 엔티티들을 저장하는 데 사용됨.
+    객체는 Object() 생성자를 통해서도 생성이 가능하다.
+
+```js
+// 1. 기본 형태
+let newuser = {
+    //key : value
+    id: 'licat',
+    pw: '1234', // 81DC9BDB52D04DC20036DBD8313ED055 이렇게 저장합니다. ("MD5는 사용하지 않습니다.")
+    name: 'leehojun',
+    email: 'paul@weniv.com',
+    active: true,
+};
+```
+
+    위와 같은 예제가 Object의 기본형태이며 앞의 값을 key, 뒤의값을 value라고 칭한다.
+
+    위의 예제에서 id값만 가져오고 싶다면 newuser['id'] 와 같이 사용가능하며 newuser[id]
+
+    라고 하게 되면 error를 출력한다 그 이유는 id를 변수로 취급하기 떄문.
+
+    또한 newuser.id 와 같이 사용가능하다.
+
+## Object 예제
+
+```js
+let user = [
+    {
+        //key : value
+        id: 'licat',
+        pw: '1234', // 81DC9BDB52D04DC20036DBD8313ED055 이렇게 저장합니다. ("MD5는 사용하지 않습니다.")
+        name: 'leehojun',
+        email: 'paul@weniv.com',
+        active: true,
+    },
+    {
+        //key : value
+        id: 'lion',
+        pw: '2345', // 81DC9BDB52D04DC20036DBD8313ED055 이렇게 저장합니다. ("MD5는 사용하지 않습니다.")
+        name: 'leehojin',
+        email: 'pa@weniv.com',
+        active: true,
+    },
+];
+```
+
+    위와 같은 형태로 자주 쓰이며 id 가 licat인 정보를 가지고 오고 싶다면
+
+    user[0]['id'] 와 같이 사용이 가능하다.
+
+---
+
+```js
+let a = 10;
+let b = 20;
+let c = 30;
+let e = { a, b, c };
+console.log(e);
+```
+
+    위와 같이 선언이 가능하며
+
+<img src='images/Js11.png'>
+
+    위와 같이 출력이 됨. (비교적 최근에 추가된 문법이며 e['a'] = 50 처럼 값을 변경할 수 있음.)
+
+---
+
+```js
+let txt = 'hello';
+let txt2 = {
+    0: 'h',
+    1: 'e',
+    2: 'l',
+    3: 'l',
+    4: 'o',
+};
+```
+
+    위와 같이 key 값으로 문자열 외에 다른 값을 넣었을 경우에는
+
+    console.log(txt2[1]); 와 같이 사용가능하며 e가 출력된다.
+
+---
+
+<img src='images/Js12.png'>
+
+    위와 같이 value의 값으로 문자열 외에 다른 값을 넣는 것도 가능하며 그림과 같이 출력됨.
+
+---
+
+    Object에서 내가 원하는 key값 또는 value값만 가지고 오고 싶다면
+
+```js
+console.log(Object.keys(newuser));
+console.log(Object.values(newuser));
+
+console.log(Object.entries(newuser));
+```
+
+    위와 같이 사용해주면 된다.
+
+    entries는 모두 가져옴
+
+<img src='images/Js13.png'>
+
+    위의 그림 참고.
+
+---
+
+    위에서 연습한 key값 value값만 가지고 오거나 전부 가져오는 것을 나중에
+
+    map을 통해 사용할 수 있으며
+
+```js
+newuser.keys();
+newuser.values();
+newuser.entries();
+```
+
+    위와 같이 편하게 사용이 가능함.
+
+## Object spread 용법
+
+```js
+let newuser = {
+    id: 'licat',
+    pw: '1234',
+    name: 'leehojun',
+    email: 'paul@weniv.com',
+    active: true,
+};
+let 회원정보업데이트 = {
+    name: 'cat',
+    email: 'jun@naver.com',
+};
+```
+
+    위와 같은 object가 있다고 가정해보자 우리는 newuser의 정보를
+
+    회원정보업데이트의 정보로 대체를 하고싶다면 어떻게 해야할까?
+
+```js
+newuser['name'] = 회원정보업데이트['name'];
+newuser['email'] = 회원정보업데이트['email'];
+```
+
+    위와 같이 입력해주어도 되겠지만 간단하게 spread 용법을 사용하여
+
+```js
+newuser = { ...newuser, ...회원정보업데이트 };
+```
+
+    위와 같이 입력해주면 모든 회원정보업데이트의 정보들이 newuser로 들어가게 된다.
+
+---
+
+```js
+let newuser2 = newuser;
+newuser2['id'] = 'helloworld';
+console.log(newuser);
+console.log(newuser2);
+```
+
+    위의 예제를 살펴보자 newuser2를 newuser로 지정을 해주었다.
+
+    그 후에 newuser2의 id를 helloworld로 바꾸어 준 뒤 각각 콘솔창에 출력을 해보면
+
+    newuser2의 정보와 newuser의 정보가 모두 바뀌게 된다. 즉, 원본이 바뀌어 버리는 것이다.
+
+    이를 방지하기 위해(원본을 만지지 않고) spread용법을 사용할 수 있는데
+
+```js
+let newuser2 = { ...newuser };
+newuser2['id'] = 'helloworld';
+console.log(newuser);
+console.log(newuser2);
+```
+
+    위와 같이 사용하면 newuser의 정보는 바뀌지 않으면서 newuser2의 정보를 바꿀 수 있다.
+
+    즉, 정리하자면 spread용법은 원본을 만지지않고 object를 컨트롤 할 때 사용할 수 있음
+
+# array
+
+    -array는 object와 마찬가지로 값의 변경이 가능하다.
+
+    -array 의 각 값은 원소 혹은 요소라고 부른다.
+
+    -array의 크기는 length 프로퍼티를 통해 알 수 있다.
+
+    -array의 생성자 함수에 숫자를 한개만 넣으면 인스턴스의 길이를,
+    여러 원소를 넣으면 배열의 원소를 뜻합니다.
+
+    -array에도 리터럴 표현이 있습니다.(  [  ]  )
+
+    -각괄호 + 인덱스를 통해 각 원소에 접근 할 수 있으며, 원소에 값을 저장 할 수도 있습니다.
+    심지어 존재하지 않는 원소에도 접근이 가능합니다.
+
+    -리터럴 생성과 동시에 원소에 접근 할 수도 있습니다. ([1,2,3,][0] === 1)
+
+```js
+let data = [10, 20, 30];
+console.log(data.length);
+
+let data2 = new Array(5);
+console.log(data2);
+
+let data3 = new Array('사과', '수박', '복숭아', '딸기', '바나나');
+console.log(data3);
+```
+
+<img src='images/Js14.png'>
+
+    위와 같이 출력이 된다.
+
+## array 예제
+
+```js
+let 과일 = ['사과', '수박', '복숭아', '딸기', '바나나'];
+console.log(과일[1]);
+```
+
+    위와 같이 사용하며 과일[1] 을 출력하면 수박이 출력됨.
+
+---
+
+```js
+let 과일 = ['사과', '수박', '복숭아', '딸기', '바나나'];
+console.log(과일[1]);
+let 꺼낸과일 = 과일.pop();
+console.log(과일);
+```
+
+    위의 예제에서 꺼낸과일을 과일.pop() 이라고 지정해주었다.
+
+    그렇게 되면 꺼낸 과일은 '바나나' 가 된다 이로 미루어보았을때 pop()은
+
+    배열에서 마지막 요소를 제거하고 그 요소를 반환한다는 것을 알 수 있다.
+
+    또한 push('복숭아')를 사용하면 배열의 마지막에 '복숭아' 를 추가한다.
+
+---
+
+    앞서 배운 spread용법을 array에서도 사용이 가능한데
+
+    앞선 우리 예제를 살펴보면 꺼낸과일 = 과일.pop() 을 해주게 되면 원본의 과일을 콘솔창에 출력하면
+
+    '바나나' 가 빠진 즉, 원본이 수정된 상태로 출력이 된다.
+
+    이를 막아주기 위해 let 꺼낸과일 = [...과일] 로 지정하여 새로운 array를 만들어
+
+    원본 수정없이 값을 수정해줄 수 있다.
+
+## array 행렬에서 값 찾기
+
+```js
+// 1. matrix(행렬)에서 값 찾기
+let array = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+];
+// 6이라는 값을 찾아보세요!
+// console.log(array[?][?])
+console.log(array[1][2]);
+```
+
+    6을 찾기 위해서 위와 같이 작성해주면 된다. (1번째 array에서 2번째 array)
+
+## array splice
+
+    splice는 기존의 요소를 삭제하거나, 교체하거나, 새 요소를 추가할 수 있다.
+
+    인덱스, 카운트, 아이템 순서로 인자를 전달한다.
+
+---
+
+```js
+let data3 = new Array('사과', '수박', '복숭아', '딸기', '바나나');
+data3.splice(3, 1); // 3번 인덱스 요소 하나만 삭제
+data3.splice(3);
+```
+
+    splice(3, 1) 을 해주게 되면 3번 인덱스요소 하나만 삭제
+
+    splice(3) 은 3번 인덱스부터 전부 삭제
+
+```js
+data3.splice(3, 0, '한라봉');
+```
+
+    위와 같이 입력해주면 3번 인덱스를 삭제하지 않고 3번인덱스 다음에 한라봉을 추가한다.
+
+    그러나 0 을 1로 바꾸어주면 3번인덱스를 삭제한 후 그자리에 한라봉을 추가한다.
+
+```js
+data3.splice(3, 0, ['포도', '체리']);
+```
+
+    위와 같이 여러개의 아이템도 추가가 가능하다.
+
+<img src='images/Js15.png'>
+
+    위와 같이 포도 체리를 추가하면 data3에는 이미지와 같은 형식으로 추가가 된다.
+
+    이를 제대로 추가해주기 위해서는
+
+```js
+data3.splice(4, 0, ...['포도', '체리']);
+```
+
+    앞서 배운 spread를 활용하여 펼쳐서 추가해주면
+
+<img src='images/Js16.png'>
+
+    위와 같이 원하는 대로 추가가 된 것을 확인할 수 있다.
