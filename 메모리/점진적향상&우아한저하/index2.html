@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <video src="">
+            <source src="test.mp4" type="video/mp4" />
+            <source src="test.webm" type="video/webm" />
+
+            <!-- 아래의 p태그는 비디오가 제대로 렌더링 되면 자동으로 나오지않습니다.
+            그러나 위의 비디오들이 렌더링이 안된다면 아래의 p태그가 출력됩니다.
+            -->
+            <p>
+                <!-- 위의 요소를 업로드하지 못하는 환경이라면 아래의 문구를 내어줍니다. -->
+                브라우저가 HTML5 비디오를 지원하지 않습니다.
+                <a href="#">비디오다운로드</a>
+            </p>
+        </video>
+        <script>
+            const canvas = document.createElement('canvas');
+            const warning = document.createElement('strong');
+
+            const ctx = canvas.getContext('webgl');
+
+            if (ctx) {
+                document.body.appendChild(canvas);
+            } else {
+                warning.innerHTML =
+                    '이 사이트는 구형브라우에서 사용되고 있습니다. 브라우저 업그레이드를 부탁드립니다.';
+                document.body.appendChild(warning);
+            }
+        </script>
+    </body>
+</html>

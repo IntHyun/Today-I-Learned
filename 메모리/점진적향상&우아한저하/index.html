@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .layout-grid {
+                display: grid;
+            }
+
+            .layout-flex {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">그퉤에에엔 나에 채피언</div>
+        <script>
+            const container = document.querySelector('.container');
+            // 아래의 코드는 그리드가 사용 가능한 환경이라면 그리드를 쓰고 안되면 플렉스라도 쓰겠다
+            // 아래와 같은 코드가 점진적 향상기법의 예라고 볼 수 있다.
+            if (container.style.grid !== undefined) {
+                // 이조건을 통과한다면 브라우저는 그리드가 사용가능한 것임.
+                container.classList.add('layout-grid');
+            } else {
+                // 그리드를 사용할 수 없는 환경의 브라우저.
+                container.classList.add('layout-flex');
+            }
+        </script>
+    </body>
+</html>

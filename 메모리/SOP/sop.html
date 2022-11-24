@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Hello SOP!</h1>
+
+        <iframe src="./test.html" frameborder="0" class="test"></iframe>
+
+        <iframe
+            class="youtube"
+            width="1083"
+            height="609"
+            src="https://www.youtube.com/embed/4TWR90KJl84"
+            title="aespa 에스파 'Next Level' MV"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+
+        <script>
+            // x 는 html파일입니.다
+            let x = document.querySelector('.test');
+            let y = document.querySelector('.youtube');
+
+            // load이벤트는 웹페이지의 리소스까지 모두 렌더링되었을 때 트리거되는 이벤트입니다.
+            // iframe에 접근하여 이벤트를 달아주고자 할 때에는 반드시 로드가 다되고 이벤트를 달아주어야합니다.
+            // 따라서 load를 통해 모든 웹페이지의 리소스가 렌더링 되고 사용할 수 있게 load이벤트를 달아줍니다.
+            // 접근하여 변경이 가능합니다 그 이유는 출처가 같기 때문입니다. 출처가 같기때문에 서로 상호작용하여
+            // 어떠한 변화를 줄 수 있습니다
+            x.addEventListener('load', () => {
+                console.log('same origin : ', x.contentDocument);
+                x.contentDocument.body.style.backgroundColor = 'red';
+            });
+
+            // 에러가납니다 왜? 출처가 다르니까
+            // 출처(호스트 주소와 포트주소)가 다르다면 상호작용하여 어떠한 변화를 줄 수 없습니다.
+            // 쎄임오리진
+            // 가지고올 수는 있으나 상호작용이 불가합니다! => 이것이 SOP입니다 보안절차정책? 다시 한 번 검색해봅시다
+            y.addEventListener('load', () => {
+                console.log('same origin : ', y.contentDocument);
+                y.contentDocument.body.style.backgroundColor = 'red';
+            });
+
+            // SOP를 좀 더 유연하게 사용하기 위한 정책이 교차출처리소스공유(CORS) 라고 합니다.
+        </script>
+    </body>
+</html>

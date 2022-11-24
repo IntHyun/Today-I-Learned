@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            async function loadheros() {
+                const res = await fetch(
+                    'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json'
+                );
+
+                if (res.ok) {
+                    console.log(await res.json());
+                } else {
+                    alert('통신에러!' + res.status);
+                }
+            }
+
+            loadheros();
+            // 네트워크 => 헤더 => 응답헤더 => acces-control-allow-origin: * 이라면 모든 도메인에서 접근할 수 있음을 의미한다.
+            // 만약 에스터리스크가 아닌 특정 주소를 입력하게 되면 그 특정주소에서만 접근이 가능합니다.
+        </script>
+    </body>
+</html>
